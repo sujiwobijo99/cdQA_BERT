@@ -1,8 +1,14 @@
-from transformers import BertForQuestionAnswering
-model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+# from transformers import BertForQuestionAnswering
+# model = BertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
 
-from transformers import BertTokenizer
-tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+# from transformers import BertTokenizer
+# tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+
+from transformers import AutoTokenizer, AutoModelForQuestionAnswering
+
+tokenizer = AutoTokenizer.from_pretrained("Andaf/bert-uncased-finetuned-squad-indonesian")
+
+model = AutoModelForQuestionAnswering.from_pretrained("Andaf/bert-uncased-finetuned-squad-indonesian", from_tf=True)
 
 import torch
 import pandas as pd 
@@ -30,7 +36,7 @@ def answer_question(question, datasets):
     answer), and identifies the words within the `answer_text` that are the
     answer. Prints them out.
     '''
-    question = tss.google(question, to_language='en')
+    # question = tss.google(question, to_language='en')
     score_start = 0
     score_end = 0
     max_score = 0
@@ -38,7 +44,8 @@ def answer_question(question, datasets):
     j=1
     for text in datasets:
         # print(text)
-        text_string = tss.google(text, to_language='en')       
+        # text_string = tss.google(text, to_language='en')       
+        text_string = str(text)
         # print(text_string)
         # ======== Tokenize ========
         # Apply the tokenizer to the input text, treating them as a text-pair.
