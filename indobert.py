@@ -16,16 +16,23 @@ data = df['paragraphs']
 data = " ".join(data)
 data = data.replace("'", "")
 
-status = True
-while status:
-    question = input("Masukkan pertanyaan:")
-
+def qa_query(question):
     answer = qa_pipeline({
         'context': data,
         'question': question
     })
+    return answer[answer]
 
-    print("Jawaban: {}".format(answer['answer']))
-    next = input("Apakah akan keluar?(Y/N)")
-    if next == "Y" :
-        status = False
+# status = False
+# while status:
+#     question = input("Masukkan pertanyaan:")
+
+#     answer = qa_pipeline({
+#         'context': data,
+#         'question': question
+#     })
+
+#     print("Jawaban: {}".format(answer['answer']))
+#     next = input("Apakah akan keluar?(Y/N)")
+#     if next == "Y" :
+#         status = False
